@@ -3,15 +3,25 @@
 //------------------------------------------------------------------------------
 const express = require('express');
 const app = express();
+const port = process.env.PORT || 3000;
 
 app.get('/', (request, response) => {
   response.send('Hello Homepage!');
 });
 
-app.get('/api', (request, response) => {
-  response.send(JSON.stringify([{ id: 1, name: 'john' }]));
+app.get('/api/users', (request, response) => {
+  response.send(
+    JSON.stringify([
+      { id: 1, name: 'john' },
+      { id: 2, name: 'peter' },
+    ])
+  );
 });
 
-app.listen(3000, () => {
-  console.log('Listening on port 3000...');
+app.get('/api/users/:id', (request, response) => {
+  response.send(request.params.id);
+});
+
+app.listen(port, () => {
+  console.log(`Listening on port ${port}...`);
 });
