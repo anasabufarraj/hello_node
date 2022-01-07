@@ -2,17 +2,24 @@
 // Copyright (c) 2022. Anas Abu Farraj.
 //------------------------------------------------------------------------------
 const express = require('express');
+const helmet = require('helmet');
+const config = require('config');
 const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(express.json()); // Middleware function to accept JSON in request body
 app.use(express.static('public')); // Middleware function to serve static files
+app.use(helmet()); // Middleware to secure Express apps by setting various HTTP headers.
 
 const users = [
   { id: 1, name: 'John' },
   { id: 2, name: 'Peter' },
   { id: 3, name: 'Sarah' },
 ];
+
+// Express app configurations
+console.log(`Name: ${config.get('name')}`);
+console.log(`Mail Server: ${config.get('mail.host')}`);
 
 // GET Requests
 app.get('/', (req, res) => {

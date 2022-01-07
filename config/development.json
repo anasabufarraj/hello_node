@@ -1,0 +1,6 @@
+{
+  "name": "Hello Express - Developmment",
+  "mail": {
+    "host": "dev-mail-server"
+  }
+}
