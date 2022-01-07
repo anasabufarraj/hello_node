@@ -7,6 +7,10 @@ const config = require('config');
 const app = express();
 const port = process.env.PORT || 3000;
 
+// Templating engine configuration
+app.set('view engine', 'pug'); // Load Pug templating engine
+app.set('views', './views'); // Views files location
+
 app.use(express.json()); // Middleware function to accept JSON in request body
 app.use(express.static('public')); // Middleware function to serve static files
 app.use(helmet()); // Middleware to secure Express apps by setting various HTTP headers.
@@ -23,7 +27,7 @@ console.log(`Mail Server: ${config.get('mail.host')}`);
 
 // GET Requests
 app.get('/', (req, res) => {
-  res.send('Hello Homepage!');
+  res.render('index.pug');
 });
 
 app.get('/api/users', (req, res) => {
